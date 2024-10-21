@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Services\services1;
+use Illuminate\Support\Facades\Storage;
 
 class DependensiTest extends TestCase
 {
@@ -21,5 +22,23 @@ class DependensiTest extends TestCase
 
 
         self::assertEquals($services,$services2);
+    }
+
+    public function testFileStorage()
+    {
+        $filesystem = Storage::disk("local");
+        $filesystem->put("file.txt","test file storage");
+        $test=  $filesystem->get("file.txt");
+
+        self::assertEquals($test,"test file storage");
+    }
+
+    public function testFileStorageLink()
+    {
+        $filesystem = Storage::disk("public");
+        $filesystem->put("file.txt","test file storage");
+        $test=  $filesystem->get("file.txt");
+
+        self::assertEquals($test,"test file storage");
     }
 }
