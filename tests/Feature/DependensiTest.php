@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Services\services1;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 
 class DependensiTest extends TestCase
 {
@@ -40,5 +41,13 @@ class DependensiTest extends TestCase
         $test=  $filesystem->get("file.txt");
 
         self::assertEquals($test,"test file storage");
+    }
+
+    public function testUploaded()
+    {
+        $image = UploadedFile::Fake()->image("asep.jpg");
+
+        $this->post("/upload/file",["picture" => $image])
+        ->assertSeeText('OK : asep.jpg');
     }
 }
