@@ -18,3 +18,12 @@ Route::get('/', function () {
 });
 
 Route::post("upload/file",[\App\Http\Controllers\FileController::Class,'UploadFile']);
+
+Route::controller(App\Http\Controllers\UserController::class)->prefix('user/')->group(function()
+{
+    route::view('/login','user.login')->middleware(App\Http\Middleware\UserMiddleware::class);
+    route::post('/doLogin','login');
+    route::get('/logout','logout');
+    
+});
+route::get('/')->middleware(App\Http\Middleware\GuestMiddleware::class);
