@@ -11,3 +11,5 @@ create table user_ (
 
 desc user_;
 select * from user_;
+show tables;
+select * from user;

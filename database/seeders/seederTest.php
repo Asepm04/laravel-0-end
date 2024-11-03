@@ -17,7 +17,7 @@ class seederTest extends Seeder
     {
         DB::table('user')->insert(
             [
-                'id'=>'1',
+                'id'=>'3',
                 'name'=>'yadi',
                 'country'=>'ina'
             ]
