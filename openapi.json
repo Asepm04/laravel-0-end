@@ -1,0 +1,90 @@
+{
+    "openapi":"3.1.0",
+    "info":{
+        "title":"api todolist",
+        "description":"restFulApi ",
+        "version":"1.0",
+        "contact":{},
+        "license":{}
+
+    },
+
+
+    "servers":[
+        {
+            "url":"https://{environment}.prod.com",
+            "description":"ini adalah url restful api",
+            "variables":{
+                "environment":{
+                    "default":"dev",
+                    "enum":["pro","env","dev"]
+                }
+            }
+        }
+    ],
+
+
+    "paths":{
+        "/todolist":{
+            "get":{
+                "sumary":"ini  get todolist",
+                "description":"for all todolist",
+                "responses":{},
+                "parameters":[{
+                    "name":"to get all data",
+                    "in":"query",
+                    "required":false,
+                    "schema":{
+                        "type":"string",
+                        "minLength":1,
+                        "maxLength":100
+                    }
+
+                }]
+
+            }
+            
+        },
+
+     "/todolist/{idtodolist}":{
+            "delete":{
+
+                "summary":"delete todolist",
+                "description":"you can delete todolist here",
+                "responses":{},
+                "parameters":[
+                    {
+                        "name":"delete",
+                        "in":"path",
+                        "required":true,
+                        "description":"hapus",
+                        "schema":{
+                            "type":"integer",
+                            "default":1
+                        }
+
+                    }
+                ]
+
+            },
+
+            "put":{
+                "summary":"update data",
+                "description":"you can update todolist here",
+                "responses":{},
+                "parameters":[
+                    {
+                        "name":"update",
+                        "in":"path",
+                        "required":true,
+                        "schema":{
+                            "type":"string",
+                            "minLength":1,
+                            "maxLength":100
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
