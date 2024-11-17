@@ -13,3 +13,12 @@ desc user_;
 select * from user_;
 show tables;
 select * from user;
+desc categoris;
+select  * from categoris;
+alter table  categoris change column update_at updated_at timestamp default CURRENT_TIMESTAMP;
+
+desc vouchers;
+select * from voucher;
+desc voucher;
+
+alter table vouchers change column voucher_id id varchar default = 0; 

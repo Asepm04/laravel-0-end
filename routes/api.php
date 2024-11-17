@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Categori;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,29 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::fallback(function(){
+    return "up not found";
+});
+
+
+Route::get("categori/{id}",function($id){
+    $categori = Categori::FindOrFail($id);
+    return new App\Http\Resources\CategoriResource($categori);
+});
+
+Route::get("categori",function()
+{
+    $categori = Categori::all();
+    return  App\Http\Resources\CategoriResource::collection($categori);
+    
+});
+
+Route::get("categoriV2",function()
+{
+    $categori = Categori::all();
+    return  new App\Http\Resources\CategoriCollResource($categori);
+    
+});
+
+
+
