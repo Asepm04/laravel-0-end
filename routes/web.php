@@ -26,7 +26,7 @@ Route::controller(App\Http\Controllers\UserController::class)->prefix('user/')->
     route::get('/logout','logout');
     
 });
-route::get('/')->middleware(App\Http\Middleware\GuestMiddleware::class);
+// route::get('/')->middleware(App\Http\Middleware\GuestMiddleware::class);
 Route::fallback(function(){
     return "ups note found";
 });

@@ -10,9 +10,17 @@
     @if(isset($error))
     {{$error}}
     @endif
+
+    @if($errors->any())
+
+    @foreach($errors->all() as $error)
+       {{$error}}
+       @endforeach
+       {{$message}}
+       @endif
     <form action="/user/doLogin" method="post">
-        <input type="text" name="user">
-        <input type="password" name="pw" id="">
+        <input type="text" name="user" >
+        <input type="password" name="pw" id="">@error('pw') {{$message}} @enderror
         <input type="submit" name="" id="">
         @csrf
     </form>

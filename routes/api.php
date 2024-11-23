@@ -3,6 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Categori;
+use App\Models\Profile;
+use App\Models\User;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -42,5 +46,30 @@ Route::get("categoriV2",function()
     
 });
 
+Route::get("/profile",function(){
+    $profile = Profile::all();
+    return  App\Http\Resources\ProfileResource::collection($profile);
+});
+
+Route::get("/user/profile",function()
+{
+    $user = User::get();
+    $user->load("profile");
+    return App\Http\Resources\UserResource::collection($user);
+});
+
+Route::get("user/profile/page",function(Request $request)
+{
+    $page = $request->input('page',1);
+    $user = User::paginate(perPage:2,page:$page);
+    $user->load("profile");
+    return App\Http\Resources\UserResource::collection($user);
+});
+
+
+//restfull api
+
+Route::post("/users",[App\Http\Controllers\UserApiController::class,"register"]);
+Route::post("/users/login",[App\Http\Controllers\UserApiController::class,"login"]);
 
 
